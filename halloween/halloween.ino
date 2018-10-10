@@ -1,8 +1,8 @@
 /* 
- * This stupid program is only a luminar animation in order to decor our street for Halloween.  
+ * This stupid program is only a light animation in order to decor our street for Halloween.  
  * We have realized 4 stuffs : 
  * 1/2 - two cats
- * 3 - a witcher
+ * 3 - a ghost, with two eyes
  * 4 - a skeleton
  * All have eyes with LEDs.
  */
@@ -11,9 +11,9 @@ int i = 0;
 
 const int CAT1 = 2;
 const int CAT2 = 5;
-const int WITCHER = 6;
-const int SKELETON = 7;
-const int SKELETON2 = 8;
+const int GHOST_1 = 6;
+const int GHOST_2 = 7;
+const int SKELETON = 8;
 const int NUMBER_CAT_ROUNDS = 12;
 const int CAT_DELAY = 200;
 const int NUMBER_ROUND_SKELETON = 4;
@@ -23,21 +23,19 @@ void setup()
 {
   pinMode(CAT1, OUTPUT);
   pinMode(CAT2, OUTPUT);
-  pinMode(WITCHER, OUTPUT);
+  pinMode(GHOST_1, OUTPUT);
+  pinMode(GHOST_2, OUTPUT);
   pinMode(SKELETON, OUTPUT);
-  pinMode(SKELETON2, OUTPUT);
 }
 
 void skeleton_high()
 {
     digitalWrite(SKELETON, HIGH);  
-    digitalWrite(SKELETON2, HIGH);    
 }
 
 void skeleton_low()
 {
     digitalWrite(SKELETON, LOW);  
-    digitalWrite(SKELETON2, LOW);      
 }
 
 void cat_high()
@@ -52,17 +50,29 @@ void cat_low()
     digitalWrite(CAT2, LOW);
 }
 
+void ghost_high()
+{
+    digitalWrite(GHOST_1, HIGH);
+    digitalWrite(GHOST_2, HIGH);
+}
+
+void ghost_low()
+{
+    digitalWrite(GHOST_1, LOW);
+    digitalWrite(GHOST_2, LOW);
+}
+
 void all_high()
 {
     cat_high();
-    digitalWrite(WITCHER, HIGH);
+    ghost_high();
     skeleton_high(); 
 }
 
 void all_low()
 {
     cat_low();
-    digitalWrite(WITCHER, LOW);
+    ghost_low();
     skeleton_low();    
 }
 
@@ -79,30 +89,30 @@ void cat_anim()
     cat_low();
 }
 
-void witcher_anim()
+void ghost_anim()
 {
-    digitalWrite(WITCHER, HIGH);
+    ghost_high();
     delay(1000);
-    digitalWrite(WITCHER, LOW);
+    ghost_low();
     delay(1000);
     for(int count = 0; count < 2; count++) {
-    digitalWrite(WITCHER, HIGH);
+    ghost_high();
     delay(300);
-    digitalWrite(WITCHER, LOW);
+    ghost_low();
     delay(100);
     }
     delay(1000);
     for(int count = 0; count < 3; count++) {
-    digitalWrite(WITCHER, HIGH);
+    ghost_high();
     delay(300);
-    digitalWrite(WITCHER, LOW);
+    ghost_low();
     delay(100);
     }
     delay(1000);
     for(int count = 0; count < 4; count++) {
-    digitalWrite(WITCHER, HIGH);
+    ghost_high();
     delay(300);
-    digitalWrite(WITCHER, LOW);
+    ghost_low();
     delay(100);     
     }
     delay(1000);
@@ -132,6 +142,6 @@ void loop()
     anim_forall();
   }
   cat_anim();
-  witcher_anim();
+  ghost_anim();
   skeleton_anim();
 }
